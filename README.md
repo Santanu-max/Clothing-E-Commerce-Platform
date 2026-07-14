@@ -1,12 +1,12 @@
-# 🛒 AI-Powered E-Commerce Platform
+AI-Powered E-Commerce Platform
 
 An AI-powered full-stack e-commerce platform built using the MERN stack. The application provides a modern online shopping experience with secure authentication, product management, shopping cart, order management, and an AI-powered shopping assistant.
 
 ---
 
-## 🚀 Features
+## Features
 
-### 👤 User Features
+###  User Features
 
 * User Registration and Login
 * Google Authentication
@@ -22,7 +22,7 @@ An AI-powered full-stack e-commerce platform built using the MERN stack. The app
 * Responsive User Interface
 * AI Shopping Assistant
 
-### 🛠️ Admin Features
+###  Admin Features
 
 * Secure Admin Login
 * Add New Products
@@ -34,7 +34,7 @@ An AI-powered full-stack e-commerce platform built using the MERN stack. The app
 
 ---
 
-## 🏗️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 
@@ -64,7 +64,7 @@ An AI-powered full-stack e-commerce platform built using the MERN stack. The app
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```text
 AI-Powered-E-Commerce-Platform/
@@ -77,7 +77,7 @@ AI-Powered-E-Commerce-Platform/
 
 ---
 
-## 🔑 Main Functionalities
+##  Main Functionalities
 
 * Secure Authentication
 * Google Login
@@ -91,7 +91,7 @@ AI-Powered-E-Commerce-Platform/
 
 ---
 
-## ⚙️ Installation
+##  Installation
 
 ### 1. Clone the repository
 
@@ -107,7 +107,7 @@ cd AI-Powered-E-Commerce-Platform
 
 ---
 
-## 📦 Install Dependencies
+##  Install Dependencies
 
 ### Backend
 
@@ -132,7 +132,7 @@ npm install
 
 ---
 
-## ▶️ Run the Project
+##  Run the Project
 
 ### Start Backend
 
@@ -157,7 +157,7 @@ npm run dev
 
 ---
 
-## 🔐 Environment Variables
+##  Environment Variables
 
 Create a `.env` file inside the `backend` folder and configure the required environment variables.
 
@@ -195,7 +195,7 @@ Add screenshots here after deployment.
 
 ---
 
-## 🚀 Future Improvements
+##  Future Improvements
 
 * Product Reviews and Ratings
 * Wishlist
@@ -209,7 +209,7 @@ Add screenshots here after deployment.
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 **Santanu Das**
 
@@ -218,7 +218,7 @@ Add screenshots here after deployment.
 
 ---
 
-## ⭐ Support
+##  Support
 
 If you found this project helpful, please consider giving it a ⭐ on GitHub.
 
