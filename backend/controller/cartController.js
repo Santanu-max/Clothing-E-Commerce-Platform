@@ -30,7 +30,7 @@ export const addToCart = async (req,res) => {
 
     return res.status(201).json({ message: "Added to cart" });
   } catch (error) {
-    console.log(error);
+    console.error("addToCart error:", error);
     return res.status(500).json({ message: "addToCart error" });
   }
 
@@ -55,7 +55,7 @@ export const UpdateCart = async (req,res) => {
 
 
     } catch (error) {
-         console.log(error)
+         console.error("updateCart error:", error);
     return res.status(500).json({message:"updateCart error"})
     }
     
@@ -64,23 +64,28 @@ export const UpdateCart = async (req,res) => {
     
 }
 
-export const getUserCart = async (req,res) => {
+export const getUserCart = async (req, res) => {
+    try {
+        const userData = await User.findById(req.userId);
 
-     try {
-         
-         const userData = await User.findById(req.userId)
-         let cartData = await userData.cartData;
+        if (!userData) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+            });
+        }
 
-
-    return res.status(200).json(cartData)
-
-
-
+        return res.status(200).json({
+            success: true,
+            cartData: userData.cartData || {},
+        });
 
     } catch (error) {
-         console.log(error)
-    return res.status(500).json({message:"getUserCart error"})
+        console.error("getUserCart error:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error",
+        });
     }
-    
-    
-}
+};

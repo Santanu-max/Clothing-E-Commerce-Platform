@@ -75,47 +75,41 @@ function Registration() {
   };
 
   return (
-    <div className="w-screen h-screen bg-gradient-to-l from-[#141414] to-[#0c2025] text-white flex flex-col">
+    <div className="w-full min-h-screen overflow-x-hidden bg-gradient-to-br from-[#0a121a] via-[#0d1b24] to-[#0a1520] text-white flex flex-col">
       {/* Header */}
-      <div className="w-full h-[80px] flex items-center px-8 gap-3">
+      <div className="w-full h-[80px] flex items-center px-4 sm:px-8 gap-3">
         <img
           src={logo}
           alt="One Cart Logo"
-          className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-lg"
+          className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-teal-300/40 shadow-lg"
         />
-
-        <h1 className="text-3xl font-bold tracking-wide">One Cart</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-wide">One Cart</h1>
       </div>
 
       {/* Main */}
-      <div className="flex-1 flex items-center justify-center">
-        <div className="w-[400px] bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-white/20">
-          <h2 className="text-3xl font-bold text-center mb-6">
-            Registration
-          </h2>
+      <div className="flex-1 flex items-center justify-center px-4 py-10">
+        <div className="relative w-full max-w-[400px] rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-md p-6 sm:p-8 shadow-2xl">
+          <div className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-teal-400 via-cyan-300 to-emerald-400 rounded-full opacity-80" />
 
-          <form
-            onSubmit={handleSignup}
-            className="flex flex-col items-center gap-4"
-          >
+          <span className="block text-center text-xs sm:text-sm tracking-[0.35em] uppercase text-teal-300/70 mb-2">Join OneCart</span>
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6">Registration</h2>
+
+          <form onSubmit={handleSignup} className="flex flex-col items-center gap-4">
             {/* Google Button */}
-            <div
+            <button
+              type="button"
               onClick={googleSignup}
-              className="w-full h-[50px] bg-[#42656cae] rounded-lg flex items-center justify-center gap-3 cursor-pointer hover:bg-[#42656c] transition-all duration-300"
+              className="w-full h-[50px] bg-white/5 border border-white/10 rounded-xl flex items-center justify-center gap-3 cursor-pointer hover:border-teal-300/40 hover:bg-white/10 transition-all duration-300"
             >
-              <img
-                src={google}
-                alt="Google"
-                className="w-6 h-6"
-              />
-              <span>Continue with Google</span>
-            </div>
+              <img src={google} alt="Google" className="w-5 h-5" />
+              <span className="text-sm sm:text-base">Continue with Google</span>
+            </button>
 
             {/* Divider */}
             <div className="w-full flex items-center gap-3">
-              <div className="flex-1 h-[1px] bg-[#96969635]"></div>
-              <span className="text-sm text-gray-300">OR</span>
-              <div className="flex-1 h-[1px] bg-[#96969635]"></div>
+              <div className="flex-1 h-[1px] bg-white/10"></div>
+              <span className="text-xs text-slate-400 tracking-wide">OR</span>
+              <div className="flex-1 h-[1px] bg-white/10"></div>
             </div>
 
             {/* Name */}
@@ -124,7 +118,7 @@ function Registration() {
               placeholder="Full Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full p-3 rounded-lg bg-white/10 border border-white/20 outline-none focus:border-cyan-400"
+              className="w-full p-3 rounded-xl bg-white/5 border border-white/10 text-sm sm:text-base outline-none focus:border-teal-300/50 transition-colors placeholder:text-slate-400"
               required
             />
 
@@ -134,7 +128,7 @@ function Registration() {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 rounded-lg bg-white/10 border border-white/20 outline-none focus:border-cyan-400"
+              className="w-full p-3 rounded-xl bg-white/5 border border-white/10 text-sm sm:text-base outline-none focus:border-teal-300/50 transition-colors placeholder:text-slate-400"
               required
             />
 
@@ -145,19 +139,19 @@ function Registration() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-3 pr-12 rounded-lg bg-white/10 border border-white/20 outline-none focus:border-cyan-400"
+                className="w-full p-3 pr-12 rounded-xl bg-white/5 border border-white/10 text-sm sm:text-base outline-none focus:border-teal-300/50 transition-colors placeholder:text-slate-400"
                 required
               />
 
               {showPassword ? (
                 <IoEyeSharp
                   onClick={() => setShowPassword(false)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-xl text-gray-300 cursor-pointer hover:text-white"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-xl text-slate-400 cursor-pointer hover:text-teal-300 transition-colors"
                 />
               ) : (
                 <HiMiniEyeSlash
                   onClick={() => setShowPassword(true)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-xl text-gray-300 cursor-pointer hover:text-white"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-xl text-slate-400 cursor-pointer hover:text-teal-300 transition-colors"
                 />
               )}
             </div>
@@ -165,17 +159,17 @@ function Registration() {
             {/* Register Button */}
             <button
               type="submit"
-              className="w-full p-3 rounded-lg bg-cyan-500 hover:bg-cyan-600 transition duration-300 font-semibold"
+              className="w-full p-3 rounded-full border border-teal-400/40 text-teal-100 font-semibold tracking-wide hover:bg-teal-400 hover:text-[#0a1520] transition-colors duration-300"
             >
               Register
             </button>
 
             {/* Login */}
-            <p className="text-sm flex gap-2">
+            <p className="text-sm text-slate-300 flex gap-2">
               Already have an account?
               <span
                 onClick={() => navigate("/login")}
-                className="text-[#5555f6cf] font-semibold cursor-pointer hover:underline"
+                className="text-teal-300 font-semibold cursor-pointer hover:underline"
               >
                 Login
               </span>

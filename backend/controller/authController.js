@@ -1,7 +1,7 @@
 import User from "../models/userModel.js";
 import validator from "validator";
 import bcrypt from "bcrypt";
-import generateToken from "../config/token.js";
+import { generateToken, generateToken1 } from "../config/token.js";
 
 // ===================== REGISTER =====================
 
@@ -38,11 +38,11 @@ export const registration = async (req, res) => {
       authProvider: "local",
     });
 
-    const token = generateToken(user._id);
+    const token = await generateToken(user._id);
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true, 
+      secure: true,
       sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
@@ -93,7 +93,7 @@ export const login = async (req, res) => {
       });
     }
 
-    const token = generateToken(user._id);
+    const token = await generateToken(user._id);
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -135,12 +135,12 @@ export const googleLogin = async (req, res) => {
       });
     }
 
-    const token = generateToken(user._id);
+    const token = await generateToken(user._id);
 
     res.cookie("token", token, {
       httpOnly: true,
       secure: true,
-      sameSite:  "none",
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -179,22 +179,24 @@ export const logout = (req, res) => {
   }
 };
 
+// ===================== ADMIN LOGIN =====================
+
 export const adminLogin = async (req, res) => {
-    try {
-        let { email, password } = req.body;
-        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
-            let token = await generateToken(email);   // was genToken1 — undefined function
-            res.cookie("token", token, {
-                httpOnly: true,
-                secure: false,
-                sameSite: "Strict",
-                maxAge: 7 * 24 * 60 * 60 * 1000
-            });
-            return res.status(200).json(token);
-        }
-        return res.status(400).json({ message: "Invalid credentials" });
-    } catch (error) {
-        console.log("AdminLogin error");
-        return res.status(500).json({ message: `AdminLogin error ${error}` });
+  try {
+    let { email, password } = req.body;
+    if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+      let token = await generateToken1(email);
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "Strict",
+        maxAge: 1 * 24 * 60 * 60 * 1000,
+      });
+      return res.status(200).json(token);
     }
+    return res.status(400).json({ message: "Invalid credentials" });
+  } catch (error) {
+    console.log("AdminLogin error");
+    return res.status(500).json({ message: `AdminLogin error ${error}` });
+  }
 };

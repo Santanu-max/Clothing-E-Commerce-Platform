@@ -27,6 +27,20 @@ const userSchema = new mongoose.Schema({
         type: Object,
         default: {},
     },
+
+    // Saved delivery / personal information (used by Profile + Place Order pages)
+    deliveryInfo: {
+        firstName: { type: String, default: "" },
+        lastName:  { type: String, default: "" },
+        email:     { type: String, default: "" },
+        street:    { type: String, default: "" },
+        city:      { type: String, default: "" },
+        state:     { type: String, default: "" },
+        pinCode:   { type: String, default: "" },
+        country:   { type: String, default: "" },
+        phone:     { type: String, default: "" },
+        isSaved:   { type: Boolean, default: false },
+    },
 }, {
     timestamps: true,
     minimize: false,

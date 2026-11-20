@@ -13,10 +13,11 @@ import {
 import { userDataContext } from "../context/UserContext.jsx";
 import axios from "axios";
 import { authDataContext } from "../context/AuthContext.jsx";
+import { shopDataContext } from "../context/ShopContext";
 
 const NAV_LINKS = [
   { to: "/", label: "Home", icon: AiOutlineHome },
-  { to: "/deals", label: "Deals", icon: AiOutlineTag },
+  { to: "/collections", label: "Collections", icon: AiOutlineTag },
   { to: "/about", label: "About", icon: AiOutlineInfoCircle },
   { to: "/contact", label: "Contact", icon: AiOutlineMail },
 ];
@@ -25,8 +26,15 @@ function Nav() {
   const { userData, setUserData } = useContext(userDataContext);
   const { serverUrl } = useContext(authDataContext);
 
-  const [showSearch, setShowSearch] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const {
+  search,
+  setSearch,
+  showSearch,
+  setShowSearch,
+  getCartCount
+} = useContext(shopDataContext);
+
+
   const [showProfile, setShowProfile] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -34,11 +42,11 @@ function Nav() {
   const profileRef = useRef(null);
   const searchInputRef = useRef(null);
 
-  const cartItemCount = 0;
+  const cartItemCount = getCartCount();
 
   const handleLogout = async () => {
     try {
-      await axios.get(`${serverUrl}/api/auth/logout`, { withCredentials: true });
+      await axios.get(`/api/auth/logout`, { withCredentials: true });
       setUserData(null);
       localStorage.removeItem("user");
       navigate("/login");
@@ -73,13 +81,16 @@ function Nav() {
   }, [showSearch]);
 
   function handleSearchSubmit(e) {
-    e.preventDefault();
-    const term = searchTerm.trim();
-    if (term) {
-      navigate(`/search?q=${encodeURIComponent(term)}`);
-      setShowSearch(false);
-    }
+  e.preventDefault();
+
+  const term = search.trim();
+
+  if (term) {
+    navigate("/collections");
   }
+
+  setShowSearch(false);
+}
 
   const desktopLinkClass = ({ isActive }) =>
     `text-[14px] font-semibold tracking-wide cursor-pointer py-[10px] px-[22px] rounded-full transition-all duration-300 ${
@@ -99,8 +110,8 @@ function Nav() {
       <div
         className={`fixed top-0 left-0 w-full h-[70px] z-30 flex items-center justify-between px-[18px] sm:px-[30px] backdrop-blur-md transition-shadow duration-300 ${
           scrolled
-            ? "bg-white/80 shadow-lg shadow-black/10"
-            : "bg-white/60 shadow-sm"
+            ? "bg-white/95 shadow-lg shadow-black/10"
+            : "bg-white/90 shadow-sm"
         }`}
       >
         {/* Logo */}
@@ -144,12 +155,12 @@ function Nav() {
             }`}
           >
             <input
-              ref={searchInputRef}
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search products..."
-              className="w-full h-[40px] rounded-full border border-gray-300 bg-white/90 px-4 text-[14px] outline-none shadow-inner focus:ring-2 focus:ring-teal-400 transition-all"
+             ref={searchInputRef}
+             type="text"
+             value={search}
+             onChange={(e) => setSearch(e.target.value)}
+             placeholder="Search products..."
+             className="w-full h-[40px] rounded-full border border-gray-300 bg-white/90 px-4 text-[14px] outline-none shadow-inner focus:ring-2 focus:ring-teal-400 transition-all"
             />
           </form>
 
@@ -228,7 +239,7 @@ function Nav() {
                     <li
                       className="w-full py-3 px-4 hover:bg-gray-100 cursor-pointer text-[14px] font-medium transition-colors"
                       onClick={() => {
-                        navigate("/orders");
+                        navigate("/order");
                         setShowProfile(false);
                       }}
                     >
