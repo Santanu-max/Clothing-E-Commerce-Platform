@@ -182,19 +182,6 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret
 
 ---
 
-## 📸 Screenshots
-
-Add screenshots here after deployment.
-
-* Home Page
-* Product Page
-* Product Details
-* Shopping Cart
-* Checkout Page
-* Admin Dashboard
-
----
-
 ##  Future Improvements
 
 * Product Reviews and Ratings
