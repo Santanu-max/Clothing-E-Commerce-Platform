@@ -6,7 +6,7 @@ function AuthContext({children}) {
   // Production -> VITE_SERVER_URL (backend URL). If it is not set, "" is used,
   // meaning same-origin calls (works with the Render /api rewrite rule).
   const serverUrl = import.meta.env.PROD
-    ? (import.meta.env.VITE_SERVER_URL || "").replace(/\/$/, "")
+    ? (import.meta.env.VITE_SERVER_URL || "https://clothing-e-commerce-platform.onrender.com").replace(/\/$/, "")
     : "http://localhost:8000";
 
     let value = {
