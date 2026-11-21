@@ -21,8 +21,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:5174",
+  "https://one-cart-frontend-4bm2.onrender.com",
+  "https://one-cart-admin-gtpi.onrender.com",
   ...(process.env.CLIENT_URLS || "")
     .split(",")
     .map((url) => url.trim().replace(/\/$/, ""))
