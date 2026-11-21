@@ -6,29 +6,21 @@ import { useContext } from 'react'
 import { authDataContext } from '../context/AuthContext'
 import { useEffect } from 'react'
 import axios from 'axios'
-import { HiOutlineCube, HiOutlineClipboardDocumentList, HiOutlineXCircle } from "react-icons/hi2"
+import { HiOutlineCube, HiOutlineClipboardDocumentList } from "react-icons/hi2"
 
 function Home() {
   const [totalProducts, setTotalProducts] = useState(0)
   const [totalOrders, setTotalOrders] = useState(0)
-  const [cancelledOrders, setCancelledOrders] = useState(0)
 
   const { serverUrl } = useContext(authDataContext)
 
   const fetchCounts = async () => {
     try {
-      const products = await axios.get(`${serverUrl}/api/product/list`, {}, { withCredentials: true })
+      const products = await axios.get(`${serverUrl}/api/product/list`, { withCredentials: true })
       setTotalProducts(products.data.length)
 
       const orders = await axios.post(`${serverUrl}/api/order/list`, {}, { withCredentials: true })
       setTotalOrders(orders.data.length)
-
-      // Count every cancelled product across all orders
-      const cancelledCount = orders.data.reduce(
-        (sum, order) => sum + order.items.filter((item) => item.cancelled).length,
-        0
-      )
-      setCancelledOrders(cancelledCount)
     } catch (err) {
       console.error("Failed to fetch counts", err)
     }
@@ -41,7 +33,6 @@ function Home() {
   const stats = [
     { label: 'Total Products', value: totalProducts, icon: HiOutlineCube, hint: 'Live in your catalog' },
     { label: 'Total Orders', value: totalOrders, icon: HiOutlineClipboardDocumentList, hint: 'Placed by customers' },
-    { label: 'Cancelled Orders', value: cancelledOrders, icon: HiOutlineXCircle, hint: 'Cancelled by customers' },
   ]
 
   return (
@@ -50,7 +41,7 @@ function Home() {
       <Sidebar />
 
       <div className='sm:ml-[64px] md:ml-[170px] lg:ml-[220px] pt-24 pb-16 px-4 sm:px-8 lg:px-10 flex flex-col items-center'>
-        <div className='w-full max-w-5xl flex flex-col items-center'>
+        <div className='w-full max-w-4xl flex flex-col items-center'>
 
           <div className='flex flex-col items-center text-center gap-2 mb-10'>
             <span className='text-xs sm:text-sm tracking-[0.35em] uppercase text-teal-300/70'>Dashboard</span>
@@ -58,7 +49,7 @@ function Home() {
             <p className='text-sm text-slate-400 max-w-md'>A quick snapshot of your store, updated in real time.</p>
           </div>
 
-          <div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+          <div className='w-full grid grid-cols-1 sm:grid-cols-2 gap-6'>
             {stats.map(({ label, value, icon: Icon, hint }, i) => (
               <div
                 key={i}

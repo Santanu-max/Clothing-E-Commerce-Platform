@@ -2,7 +2,12 @@ import React, { createContext } from 'react'
 
 export const authDataContext = createContext()
 function AuthContext({children}) {
-    let serverUrl = "http://localhost:8000"
+    // Local dev  -> backend on localhost:8000
+  // Production -> VITE_SERVER_URL (backend URL). If it is not set, "" is used,
+  // meaning same-origin calls (works with the Render /api rewrite rule).
+  const serverUrl = import.meta.env.PROD
+    ? (import.meta.env.VITE_SERVER_URL || "").replace(/\/$/, "")
+    : "http://localhost:8000";
 
     let value = {
       serverUrl
