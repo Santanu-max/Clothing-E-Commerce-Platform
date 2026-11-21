@@ -10,7 +10,7 @@ import AdminContext from './context/AdminContext.jsx'
 // Every axios call (including the relative "/api/..." ones) goes to the backend
 // and always sends the login cookie.
 axios.defaults.baseURL = import.meta.env.PROD
-  ? (import.meta.env.VITE_SERVER_URL || '').replace(/\/$/, '')
+  ? (import.meta.env.VITE_SERVER_URL || 'https://clothing-e-commerce-platform.onrender.com').replace(/\/$/, '')
   : 'http://localhost:8000'
 axios.defaults.withCredentials = true
 
